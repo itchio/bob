@@ -386,6 +386,16 @@ async function cd(dir, f) {
   }
 }
 
+/**
+ * Exports an environment variable
+ * @param {string} k
+ * @param {string} v
+ */
+function setenv(k, v) {
+  console.log(`export ${chalk.green(k)}=${chalk.yellow(v)}`);
+  process.env[k] = v;
+}
+
 module.exports = {
   $,
   $$,
@@ -405,4 +415,5 @@ module.exports = {
   yesno,
   confirm,
   cd,
+  setenv,
 };
