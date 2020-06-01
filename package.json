@@ -9,6 +9,7 @@
     "build": "tsc",
     "prepare": "npm run build"
   },
+  "files": ["index.d.ts"],
   "keywords": [],
   "author": "Amos Wenger <amoswenger@gmail.com>",
   "license": "MIT",
