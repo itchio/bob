@@ -1,6 +1,6 @@
 {
   "name": "@itchio/bob",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CI script utilities",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -9,7 +9,9 @@
     "build": "tsc",
     "prepare": "npm run build"
   },
-  "files": ["index.d.ts"],
+  "files": [
+    "index.d.ts"
+  ],
   "keywords": [],
   "author": "Amos Wenger <amoswenger@gmail.com>",
   "license": "MIT",
