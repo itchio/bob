@@ -118,23 +118,13 @@ const chalk = {
 };
 
 /**
+ * Execute a command. If on Windows, run it through bash.
  * @param {string} cmd
  */
 function $(cmd) {
   console.log(chalk.yellow(`📜 ${cmd}`));
   const cp = require("child_process");
-  cp.execSync(cmd, {
-    stdio: "inherit",
-  });
-}
-
-/**
- * @param {string} cmd
- */
-function $bash(cmd) {
-  console.log(chalk.yellow(`📝 ${cmd}`));
-  const cp = require("child_process");
-  if (detectOS() === "windows") {
+  if (process.platform === "win32") {
     cp.execSync("bash", {
       stdio: ["pipe", "inherit", "inherit"],
       input: cmd,
@@ -159,10 +149,19 @@ function $$(cmd, opts) {
     console.log(chalk.yellow(`📜 ${cmd}`));
   }
   const cp = require("child_process");
-  return cp.execSync(cmd, {
-    stdio: ["inherit", "pipe", "inherit"],
-    encoding: "utf8",
-  });
+
+  if (process.platform === "win32") {
+    return cp.execSync("bash", {
+      stdio: ["pipe", "pipe", "inherit"],
+      input: cmd,
+      encoding: "utf8",
+    });
+  } else {
+    return cp.execSync(cmd, {
+      stdio: ["inherit", "pipe", "inherit"],
+      encoding: "utf8",
+    });
+  }
 }
 
 /**
@@ -399,7 +398,6 @@ function setenv(k, v) {
 module.exports = {
   $,
   $$,
-  $bash,
   formatSize,
   formatPercent,
   sizeof,
