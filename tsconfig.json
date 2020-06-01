@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+      "allowJs": true,
+      "strict": true,
+      "resolveJsonModule": true,
+      "emitDeclarationOnly": true,
+      "declaration": true
+  },
+  "files": ["index.js"]
+}
