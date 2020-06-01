@@ -180,7 +180,7 @@ function setVerbose(v) {
 }
 
 /**
- * @returns {string}
+ * @returns {"windows" | "darwin" | "linux"}
  */
 function detectOS() {
   switch (process.platform) {
