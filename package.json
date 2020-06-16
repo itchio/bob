@@ -1,6 +1,6 @@
 {
   "name": "@itchio/bob",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "CI script utilities",
   "main": "index.js",
   "typings": "index.d.ts",
