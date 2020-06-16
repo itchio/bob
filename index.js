@@ -4,6 +4,7 @@
 const fs = require("fs");
 const https = require("https");
 const readline = require("readline");
+const { IncomingMessage } = require("http");
 
 process.on("unhandledRejection", (reason, p) => {
   console.log("Unhandled Rejection at: Promise", p, "reason:", reason);
@@ -200,6 +201,7 @@ function detectOS() {
  * @returns {Promise<void>}
  */
 async function downloadToStream(url, out) {
+  /** @type {IncomingMessage} */
   let res = await new Promise((resolve, reject) => {
     let req = https.request(
       url,
@@ -224,6 +226,10 @@ async function downloadToStream(url, out) {
     debug(`Redirected to ${chalk.yellow(url.hostname)}`);
     res.destroy();
     return await downloadToStream(redirectURL, out);
+  }
+
+  if (res.statusCode !== 200) {
+    throw new Error(`Got HTTP ${res.statusCode} for ${url}`);
   }
 
   let contentLength = res.headers["content-length"] || "";
